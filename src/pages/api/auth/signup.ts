@@ -11,7 +11,7 @@ export default async function handler(
   // parse and type check the request body with zod
   const validBody = signupSchema.safeParse(req.body);
   if (!validBody.success) {
-    res.status(422).json({ message: validBody.error });
+    res.status(422).json({ message: validBody.error.message });
     return;
   }
 

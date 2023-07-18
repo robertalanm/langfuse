@@ -501,7 +501,7 @@ components:
       title: CreateColdkeyRequest
       type: object
       properties:
-        ownerId:
+        projectId:
           type: string
           nullable: true
         ss58:
@@ -519,7 +519,7 @@ components:
       properties:
         id:
           type: string
-        ownerId:
+        projectId:
           type: string
         createdAt:
           type: string
@@ -535,7 +535,7 @@ components:
           type: string
       required:
         - id
-        - ownerId
+        - projectId
         - createdAt
         - updatedAt
         - ss58
@@ -820,7 +820,7 @@ components:
       title: CreateHotkeyRequest
       type: object
       properties:
-        ownerId:
+        projectId:
           type: string
           nullable: true
         ss58:
@@ -838,7 +838,7 @@ components:
       properties:
         id:
           type: string
-        ownerId:
+        projectId:
           type: string
         createdAt:
           type: string
@@ -854,7 +854,7 @@ components:
           type: string
       required:
         - id
-        - ownerId
+        - projectId
         - createdAt
         - updatedAt
         - ss58
@@ -864,7 +864,7 @@ components:
       title: CreateNeuronsRequest
       type: object
       properties:
-        ownerId:
+        projectId:
           type: string
           nullable: true
         rank:
@@ -891,7 +891,7 @@ components:
       properties:
         id:
           type: string
-        ownerId:
+        projectId:
           type: string
         timestamp:
           type: string
@@ -910,7 +910,7 @@ components:
           type: integer
       required:
         - id
-        - ownerId
+        - projectId
         - timestamp
         - rank
         - stake
@@ -1136,7 +1136,7 @@ components:
       title: CreateWalletRequest
       type: object
       properties:
-        ownerId:
+        projectId:
           type: string
           nullable: true
         coldkeyId:
@@ -1157,8 +1157,14 @@ components:
       properties:
         id:
           type: integer
-        ownerId:
+        projectId:
           type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
         coldkeyId:
           type: string
         hotkeyId:
@@ -1169,7 +1175,9 @@ components:
           type: string
       required:
         - id
-        - ownerId
+        - projectId
+        - createdAt
+        - updatedAt
         - coldkeyId
         - hotkeyId
         - registered
