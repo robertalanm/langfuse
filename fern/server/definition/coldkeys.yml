@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+# Coldkey
+service:
+  auth: true
+  base-path: /api/public
+  endpoints:
+    createColdkey:
+      docs: Add a coldkey to the database
+      method: POST
+      path: /coldkeys
+      request: CreateColdkeyRequest
+      response: Coldkey
+
+types:
+  CreateColdkeyRequest:
+    properties:
+      projectId: optional<string>  # Replace 'ownerId' with 'projectId'
+      ss58: optional<string>
+      pubfile: optional<string>
+      name: optional<string>
+  Coldkey:
+    properties:
+      id: string
+      projectId: string  # Replace 'ownerId' with 'projectId'
+      createdAt: datetime
+      updatedAt: datetime
+      ss58: string
+      pubfile: string
+      name: string
