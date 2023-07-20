@@ -365,7 +365,7 @@ export default function Layout(props: PropsWithChildren) {
                           {session.data?.user?.name
                             ? session.data.user.name
                                 .split(" ")
-                                .map((word) => word[0])
+                                .map((word: string) => word[0])
                                 .slice(0, 2)
                                 .concat("")
                             : null}
