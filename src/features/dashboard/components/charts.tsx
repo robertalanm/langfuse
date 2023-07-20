@@ -71,7 +71,7 @@ export function ChartCombinedEmission(props: {
   agg: DateTimeAggregationOption;
   projectId: string;
 }) {
-  const data = api.dashboard.emissionOverTime.useQuery({
+  const data = api.dashboard.emissionOverTimeTotal.useQuery({
     agg: props.agg,
     projectId: props.projectId,
   });
@@ -97,12 +97,14 @@ export function ChartCombinedEmission(props: {
   );
 }
 
-export function ChartCombinedEmissionSubnet1(props: {
+export function ChartCombinedEmissionPerNetuid(props: {
   agg: DateTimeAggregationOption;
+  netuid: '1' | '11';
   projectId: string;
 }) {
-  const data = api.dashboard.emissionOverTimeSubnet1.useQuery({
+  const data = api.dashboard.emissionOverTime.useQuery({
     agg: props.agg,
+    netuid: props.netuid,
     projectId: props.projectId,
   });
 
@@ -110,37 +112,6 @@ export function ChartCombinedEmissionSubnet1(props: {
     <Card>
       <CardHeader className="relative">
         <CardTitle>Total Emission: netuid 1</CardTitle>
-        {data.isLoading ? (
-          <div className="absolute right-5 top-5 ">
-            <Loader className="h-5 w-5 animate-spin" />
-          </div>
-        ) : 
-          <div className="absolute right-5 top-5 ">
-            {(data.data?.[(data.data?.length || 0) - 1]?.values?.[0]?.value ?? 0) * 3}τ per hour
-          </div>
-        }
-      </CardHeader>
-      <CardContent>
-        <BaseTimeSeriesChart agg={props.agg} data={data.data ?? []} />
-      </CardContent>
-    </Card>
-  );
-}
-
-
-export function ChartCombinedEmissionSubnet11(props: {
-  agg: DateTimeAggregationOption;
-  projectId: string;
-}) {
-  const data = api.dashboard.emissionOverTimeSubnet11.useQuery({
-    agg: props.agg,
-    projectId: props.projectId,
-  });
-
-  return (
-    <Card>
-      <CardHeader className="relative">
-        <CardTitle>Total Emission: Netuid 11</CardTitle>
         {data.isLoading ? (
           <div className="absolute right-5 top-5 ">
             <Loader className="h-5 w-5 animate-spin" />
@@ -206,44 +177,6 @@ export function ChartIncentiveOverTime(props: {
             <Loader className="h-5 w-5 animate-spin" />
           </div>
         ) : null}
-      </CardHeader>
-      <CardContent>
-        <BaseTimeSeriesChart agg={props.agg} data={data.data ?? []} />
-      </CardContent>
-    </Card>
-  );
-}
-
-
-export function ChartCombinedEmissionSubnet(props: {
-  agg: DateTimeAggregationOption;
-  projectId: string;
-  netuid: '1' | '11';
-}) {
-  const data =
-    props.netuid === '1'
-      ? api.dashboard.emissionOverTimeSubnet1.useQuery({
-          agg: props.agg,
-          projectId: props.projectId,
-        })
-      : api.dashboard.emissionOverTimeSubnet11.useQuery({
-          agg: props.agg,
-          projectId: props.projectId,
-        });
-
-  return (
-    <Card>
-      <CardHeader className="relative">
-        <CardTitle>Total Emission: Netuid {props.netuid}</CardTitle>
-        {data.isLoading ? (
-          <div className="absolute right-5 top-5 ">
-            <Loader className="h-5 w-5 animate-spin" />
-          </div>
-        ) : (
-          <div className="absolute right-5 top-5 ">
-            {(data.data?.[(data.data?.length || 0) - 1]?.values?.[0]?.value ?? 0) * 3}τ per hour
-          </div>
-        )}
       </CardHeader>
       <CardContent>
         <BaseTimeSeriesChart agg={props.agg} data={data.data ?? []} />

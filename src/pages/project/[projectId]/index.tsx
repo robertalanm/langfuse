@@ -10,7 +10,7 @@ import {
   ChartScores,
   ChartTraces,
   ChartCombinedEmission,
-  ChartCombinedEmissionSubnet,
+  ChartCombinedEmissionPerNetuid,
   ChartStakeOverTime,
   ChartTrustOverTime,
   ChartIncentiveOverTime,
@@ -70,7 +70,7 @@ export default function Start() {
   {netuid !== "total" && (
     <>
       <div className="col-span-1 md:col-span-2 xl:col-span-6">
-        <ChartCombinedEmissionSubnet agg={agg} projectId={projectId} netuid={netuid} />
+        <ChartCombinedEmissionPerNetuid agg={agg} projectId={projectId} netuid={netuid} />
       </div>
       <div className="col-span-1 md:col-span-2 xl:col-span-3">
         <ChartTrustOverTime agg={agg} projectId={projectId} netuid={netuid} />
