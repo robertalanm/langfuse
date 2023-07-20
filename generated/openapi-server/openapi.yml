@@ -271,6 +271,50 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateNeuronsRequest'
+    patch:
+      description: Update a neuron in the database
+      operationId: neurons_updateNeurons
+      tags:
+        - Neurons
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Neurons'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+        '405':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      security: *ref_0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNeuronsRequest'
   /api/public/scores:
     post:
       description: Add a score to the database
@@ -501,7 +545,7 @@ components:
       title: CreateColdkeyRequest
       type: object
       properties:
-        ownerId:
+        projectId:
           type: string
           nullable: true
         ss58:
@@ -519,7 +563,7 @@ components:
       properties:
         id:
           type: string
-        ownerId:
+        projectId:
           type: string
         createdAt:
           type: string
@@ -535,7 +579,7 @@ components:
           type: string
       required:
         - id
-        - ownerId
+        - projectId
         - createdAt
         - updatedAt
         - ss58
@@ -820,7 +864,7 @@ components:
       title: CreateHotkeyRequest
       type: object
       properties:
-        ownerId:
+        projectId:
           type: string
           nullable: true
         ss58:
@@ -838,7 +882,7 @@ components:
       properties:
         id:
           type: string
-        ownerId:
+        projectId:
           type: string
         createdAt:
           type: string
@@ -854,7 +898,7 @@ components:
           type: string
       required:
         - id
-        - ownerId
+        - projectId
         - createdAt
         - updatedAt
         - ss58
@@ -864,8 +908,20 @@ components:
       title: CreateNeuronsRequest
       type: object
       properties:
-        ownerId:
+        id:
           type: string
+          nullable: true
+        projectId:
+          type: string
+          nullable: true
+        coldkey:
+          type: string
+          nullable: true
+        hotkey:
+          type: string
+          nullable: true
+        uid:
+          type: integer
           nullable: true
         rank:
           type: integer
@@ -885,17 +941,73 @@ components:
         trust:
           type: integer
           nullable: true
+        netuid:
+          type: integer
+          nullable: true
+        registered:
+          type: boolean
+          nullable: true
+    UpdateNeuronsRequest:
+      title: UpdateNeuronsRequest
+      type: object
+      properties:
+        id:
+          type: string
+        projectId:
+          type: string
+          nullable: true
+        coldkey:
+          type: string
+          nullable: true
+        hotkey:
+          type: string
+          nullable: true
+        uid:
+          type: integer
+          nullable: true
+        rank:
+          type: integer
+          nullable: true
+        stake:
+          type: integer
+          nullable: true
+        emission:
+          type: integer
+          nullable: true
+        incentive:
+          type: integer
+          nullable: true
+        consensus:
+          type: integer
+          nullable: true
+        trust:
+          type: integer
+          nullable: true
+        netuid:
+          type: integer
+          nullable: true
+        registered:
+          type: boolean
+          nullable: true
+      required:
+        - id
     Neurons:
       title: Neurons
       type: object
       properties:
         id:
           type: string
-        ownerId:
+        projectId:
           type: string
         timestamp:
           type: string
           format: date-time
+        coldkey:
+          type: string
+        hotkey:
+          type: string
+        uid:
+          type: integer
         rank:
           type: integer
         stake:
@@ -908,16 +1020,25 @@ components:
           type: integer
         trust:
           type: integer
+        netuid:
+          type: integer
+        registered:
+          type: boolean
       required:
         - id
-        - ownerId
+        - projectId
         - timestamp
+        - coldkey
+        - hotkey
+        - uid
         - rank
         - stake
         - emission
         - incentive
         - consensus
         - trust
+        - netuid
+        - registered
     CreateScoreRequest:
       title: CreateScoreRequest
       type: object
@@ -1136,7 +1257,7 @@ components:
       title: CreateWalletRequest
       type: object
       properties:
-        ownerId:
+        projectId:
           type: string
           nullable: true
         coldkeyId:
@@ -1157,8 +1278,14 @@ components:
       properties:
         id:
           type: integer
-        ownerId:
+        projectId:
           type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
         coldkeyId:
           type: string
         hotkeyId:
@@ -1169,7 +1296,9 @@ components:
           type: string
       required:
         - id
-        - ownerId
+        - projectId
+        - createdAt
+        - updatedAt
         - coldkeyId
         - hotkeyId
         - registered

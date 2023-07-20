@@ -1,5 +1,5 @@
 export const dateTimeAggregationOptions = [
-  "1 year",
+  // "1 year",
   "3 months",
   "1 month",
   "7 days",
@@ -17,11 +17,11 @@ export const dateTimeAggregationSettings: Record<
     date_formatter: (date: Date) => string;
   }
 > = {
-  "1 year": {
-    date_trunc: "month",
-    date_formatter: (date) =>
-      date.toLocaleDateString("en-US", { year: "2-digit", month: "short" }),
-  },
+  // "1 year": {
+  //   date_trunc: "month",
+  //   date_formatter: (date) =>
+  //     date.toLocaleDateString("en-US", { year: "2-digit", month: "short" }),
+  // },
   "3 months": {
     date_trunc: "week",
     date_formatter: (date) =>

@@ -10,25 +10,57 @@ service:
       path: /neurons
       request: CreateNeuronsRequest
       response: Neurons
+    updateNeurons:
+      docs: Update a neuron in the database
+      method: PATCH
+      path: /neurons
+      request: UpdateNeuronsRequest
+      response: Neurons
 
 types:
   CreateNeuronsRequest:
     properties:
-      projectId: optional<string>  # Replace 'ownerId' with 'projectId'
+      id: optional<string>
+      projectId: optional<string>
+      coldkey: optional<string>
+      hotkey: optional<string>
+      uid: optional<integer>
       rank: optional<integer>
       stake: optional<integer>
       emission: optional<integer>
       incentive: optional<integer>
       consensus: optional<integer>
       trust: optional<integer>
+      netuid: optional<integer>
+      registered: optional<boolean>
+  UpdateNeuronsRequest:
+    properties:
+      id: string
+      projectId: optional<string>
+      coldkey: optional<string>
+      hotkey: optional<string>
+      uid: optional<integer>
+      rank: optional<integer>
+      stake: optional<integer>
+      emission: optional<integer>
+      incentive: optional<integer>
+      consensus: optional<integer>
+      trust: optional<integer>
+      netuid: optional<integer>
+      registered: optional<boolean>
   Neurons:
     properties:
       id: string
-      projectId: string  # Replace 'ownerId' with 'projectId'
+      projectId: string
       timestamp: datetime
+      coldkey: string
+      hotkey: string
+      uid: integer
       rank: integer
       stake: integer
       emission: integer
       incentive: integer
       consensus: integer
       trust: integer
+      netuid: integer
+      registered: boolean

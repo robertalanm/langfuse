@@ -57,13 +57,13 @@ export default function SignIn() {
           <span className="block text-center font-mono text-4xl font-bold">
             🪢
           </span>
-          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-50">
             Create new account
           </h2>
         </div>
 
         <div className="mt-14 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+          <div className="bg-gray-800 px-6 py-12 shadow sm:rounded-lg sm:px-12">
             <Form {...form}>
               <form
                 className="space-y-6"
@@ -120,11 +120,11 @@ export default function SignIn() {
             </Form>
           </div>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-10 text-center text-sm text-gray-400">
             Already have an account?{" "}
             <Link
               href="/auth/sign-in"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              className="font-semibold leading-6 text-gray-50 hover:text-gray-200"
             >
               Sign in
             </Link>

@@ -55,7 +55,7 @@ export function BaseTimeSeriesChart(props: {
       data={transformArray(props.data)}
       index="timestamp"
       categories={Array.from(labels)}
-      colors={["indigo", "cyan"]}
+      colors={["green", "green"]}
       valueFormatter={dataFormatter}
     />
   );
