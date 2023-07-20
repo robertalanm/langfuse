@@ -172,7 +172,7 @@ export default function Traces() {
               >
                 <div className="min-w-1 flex flex-1 items-center gap-2 p-2">
                   {/* <span className="absolute inset-0" aria-hidden="true" /> */}
-                  <p className=" text-xs font-medium text-gray-900">
+                  <p className=" text-xs font-medium text-gray-50">
                     {value.name}
                   </p>
                   <p className="inline-flex items-baseline rounded-full bg-gray-100 px-2.5 py-0.5 text-lg font-medium text-gray-500 md:mt-2 lg:mt-0">

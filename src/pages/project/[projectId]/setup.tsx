@@ -55,7 +55,7 @@ const instructionItems = [
 function Instructions() {
   return (
     <div>
-      <h2 className="text-base font-semibold leading-6 text-gray-900">
+      <h2 className="text-base font-semibold leading-6 text-gray-50">
         Integrate langfuse
       </h2>
       <p className="mt-1 text-sm text-gray-500">
@@ -83,7 +83,7 @@ function Instructions() {
                 </span>
               </div>
               <div className="min-w-0 flex-1">
-                <div className="text-sm font-medium text-gray-900">
+                <div className="text-sm font-medium text-gray-50">
                   <a href={item.href} target="_blank">
                     <span className="absolute inset-0" aria-hidden="true" />
                     {item.name}

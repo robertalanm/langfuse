@@ -30,20 +30,20 @@ export function ApiKeyList(props: { projectId: string }) {
 
   return (
     <div>
-      <h2 className="mb-5 text-base font-semibold leading-6 text-gray-900">
+      <h2 className="mb-5 text-base font-semibold leading-6 text-gray-50">
         API keys
       </h2>
       <Card className="mb-4">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="hidden text-gray-900 md:table-cell">
+              <TableHead className="hidden text-gray-50 md:table-cell">
                 Created
               </TableHead>
-              {/* <TableHead className="text-gray-900">Note</TableHead> */}
-              <TableHead className="text-gray-900">Public Key</TableHead>
-              <TableHead className="text-gray-900">Secret Key</TableHead>
-              {/* <TableHead className="text-gray-900">Last used</TableHead> */}
+              {/* <TableHead className="text-gray-50">Note</TableHead> */}
+              <TableHead className="text-gray-50">Public Key</TableHead>
+              <TableHead className="text-gray-50">Secret Key</TableHead>
+              {/* <TableHead className="text-gray-50">Last used</TableHead> */}
               <TableHead />
             </TableRow>
           </TableHeader>

@@ -43,15 +43,15 @@ export default function SignIn() {
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <span className="block text-center font-mono text-4xl font-bold">
-            🪢
+            {/* bat emoji */} rao.town
           </span>
-          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-50">
             Sign in to your account
           </h2>
         </div>
 
         <div className="mt-14 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+          <div className="bg-gray-800 px-6 py-12 shadow sm:rounded-lg sm:px-12">
             <Form {...form}>
               <form
                 className="space-y-6"
@@ -95,11 +95,11 @@ export default function SignIn() {
             </Form>
           </div>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-10 text-center text-sm text-gray-400">
             No account yet?{" "}
             <Link
               href="/auth/sign-up"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              className="font-semibold leading-6 text-gray-50 hover:text-gray-200"
             >
               Sign up
             </Link>

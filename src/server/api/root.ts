@@ -6,7 +6,7 @@ import { dashboardRouter } from "@/src/features/dashboard/server/dashboardRouter
 import { projectsRouter } from "@/src/features/projects/server/projectsRouter";
 import { apiKeysRouter } from "@/src/features/publicApi/server/apiKeyRouter";
 import { neuronsRouter } from "./routers/neurons";
-
+import { walletsRouter } from "@/src/features/wallets/server/walletsRouter";
 /**
  * This is the primary router for your server.
  *
@@ -21,6 +21,7 @@ export const appRouter = createTRPCRouter({
   apiKeys: apiKeysRouter,
 
   neurons: neuronsRouter,
+  wallets: walletsRouter,
 });
 
 // export type definition of API

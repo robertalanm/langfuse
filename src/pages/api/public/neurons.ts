@@ -8,24 +8,37 @@ import { checkApiAccessScope } from "@/src/features/publicApi/server/apiScope";
 
 const NeuronsCreateSchema = z.object({
   id: z.string().nullish(),
-  ownerId: z.string().nullish(),
   projectId: z.string().nullish(),
+  coldkey: z.string().nullish(),
+  hotkey: z.string().nullish(),
+  uid: z.number().nullish(),
   rank: z.number().nullish(),
   stake: z.number().nullish(),
   emission: z.number().nullish(),
   incentive: z.number().nullish(),
   consensus: z.number().nullish(),
   trust: z.number().nullish(),
+  netuid: z.number().nullish(),
+  registered: z.boolean().nullish()
 });
 
 const NeuronPatchSchema = z.object({
   neuronId: z.string(),
-  rank: z.number(),
+  coldkey: z.string().nullish(),
+  hotkey: z.string().nullish(),
+  uid: z.number().nullish(),
+  rank: z.number().nullish(),
   stake: z.number().nullish(),
   emission: z.number().nullish(),
   incentive: z.number().nullish(),
   consensus: z.number().nullish(),
   trust: z.number().nullish(),
+  netuid: z.number().nullish(),
+  registered: z.boolean().nullish()
+});
+
+const NeuronDeleteSchema = z.object({
+  neuronId: z.string(),
 });
 
 export default async function handler(
@@ -50,14 +63,18 @@ export default async function handler(
       const obj = NeuronsCreateSchema.parse(req.body);
       const {
         id,
-        ownerId,
         projectId,
+        coldkey,
+        hotkey,
+        uid,
         rank,
         stake,
         emission,
         incentive,
         consensus,
         trust,
+        netuid,
+        registered,
       } = obj;
 
       // CHECK ACCESS SCOPE
@@ -74,14 +91,18 @@ export default async function handler(
       const newNeuron = await prisma.neurons.create({
         data: {
           id: id ?? undefined,
-          owner: { connect: { id: ownerId ? ownerId : "" } },
           project: { connect: { id: projectId ? projectId : "" } },
+          coldkey: coldkey ? coldkey : "",
+          hotkey: hotkey ? hotkey : "",
+          uid: uid ? uid : 0,
           rank: rank ? rank : 0,
           stake: stake ? stake : 0,
           emission: emission ? emission : 0,
           incentive: incentive ? incentive : 0,
           consensus: consensus ? consensus : 0,
           trust: trust ? trust : 0,
+          netuid: netuid ? netuid : 1,
+          registered: registered ? registered : false,
         },
       });
 
@@ -131,6 +152,8 @@ export default async function handler(
         error: errorMessage,
       });
     }
+  } else if (req.method === "DELETE") {
+    // DELETE handling code
   } else {
     return res.status(405).json({ message: "Method not allowed" });
   }

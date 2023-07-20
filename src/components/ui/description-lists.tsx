@@ -18,7 +18,7 @@ export default function DescriptionList(props: {
     <div>
       {props.header ? (
         <div className="px-4 sm:px-0">
-          <h3 className="text-base font-semibold leading-7 text-gray-900">
+          <h3 className="text-base font-semibold leading-7 text-gray-50">
             {props.header.title}
           </h3>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
@@ -33,7 +33,7 @@ export default function DescriptionList(props: {
               key={item.label}
               className={`sm:grid-cols-${totalColumns} px-4 py-6 sm:grid sm:gap-4 sm:px-0`}
             >
-              <dt className="text-sm font-medium leading-6 text-gray-900">
+              <dt className="text-sm font-medium leading-6 text-gray-50">
                 {item.label}
               </dt>
               <dd

@@ -122,12 +122,12 @@ const ObservationInfo = (props: {
             {props.observation.type === "GENERATION" ? (
               <Link
                 href={`/project/${props.projectId}/generations/${props.observation.id}`}
-                className="overflow-hidden font-medium text-gray-900 hover:text-gray-500"
+                className="overflow-hidden font-medium text-gray-50 hover:text-gray-500"
               >
                 {props.observation.type}: {props.observation.name} ↗
               </Link>
             ) : (
-              <span className="overflow-hidden font-medium text-gray-900">
+              <span className="overflow-hidden font-medium text-gray-50">
                 {props.observation.type}: {props.observation.name}
               </span>
             )}

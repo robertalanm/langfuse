@@ -8,8 +8,23 @@ import {
 import { type Neuron } from "@/src/utils/types";
 
 const NeuronFilterOptions = z.object({
-  ownerId: z.array(z.string()).nullable(),
   projectId: z.string(), // Required for protectedProjectProcedure
+});
+
+const NeuronInput = z.object({
+  id: z.string().nullish(),
+  projectId: z.string().nullish(),
+  coldkey: z.string().nullish(),
+  hotkey: z.string().nullish(),
+  uid: z.number().nullish(),
+  rank: z.number().nullish(),
+  stake: z.number().nullish(),
+  emission: z.number().nullish(),
+  incentive: z.number().nullish(),
+  consensus: z.number().nullish(),
+  trust: z.number().nullish(),
+  netuid: z.number().nullish(),
+  registered: z.boolean().nullish(),
 });
 
 export const neuronsRouter = createTRPCRouter({
@@ -18,15 +33,7 @@ export const neuronsRouter = createTRPCRouter({
     .query(async ({ input, ctx }) => {
       const neurons = (await ctx.prisma.neurons.findMany({
         where: {
-          owner: {
-            //@ts-ignore
-            projectId: input.projectId,
-          },
-          ...(input.ownerId
-            ? {
-                ownerId: { in: input.ownerId },
-              }
-            : undefined),
+          projectId: input.projectId,
         },
         orderBy: {
           timestamp: "desc",
@@ -37,49 +44,41 @@ export const neuronsRouter = createTRPCRouter({
       return neurons;
     }),
 
-  availableFilterOptions: protectedProjectProcedure
-    .input(NeuronFilterOptions)
-    .query(async ({ input, ctx }) => {
-      const filter = {
-        owner: {
-          projectId: input.projectId,
-        },
-        ...(input.ownerId
-          ? {
-              ownerId: { in: input.ownerId },
-            }
-          : undefined),
-      };
+  uniqueMostRecent: protectedProjectProcedure
+  .input(NeuronFilterOptions)
+  .query(async ({ input, ctx }) => {
+    // Get distinct combinations of 'coldkey' and 'hotkey'
+    const neuronKeys = await ctx.prisma.neurons.findMany({
+      select: { coldkey: true, hotkey: true, netuid: true },
+      distinct: ['coldkey', 'hotkey', 'netuid'],
+    });
 
-      const ownerIds = await ctx.prisma.neurons.groupBy({
-        //@ts-ignore
-        where: filter,
-        by: ["ownerId"],
-        _count: {
-          _all: true,
+    // For each combination, fetch the most recent neuron
+    const mostRecentNeurons = await Promise.all(neuronKeys.map(async ({ coldkey, hotkey, netuid }) => {
+      return await ctx.prisma.neurons.findFirst({
+        where: {
+          coldkey,
+          hotkey,
+          netuid,
+        },
+        orderBy: {
+          timestamp: 'desc',
         },
       });
+    }));
 
-      return [
-        {
-          key: "ownerId",
-          occurrences: ownerIds.map((i) => {
-            return { key: i.ownerId, count: i._count };
-          }),
-        },
-      ];
-    }),
+    return mostRecentNeurons;
+  }),
+
+
   byId: protectedProcedure.input(z.string()).query(async ({ input, ctx }) => {
     const neuron = (await ctx.prisma.neurons.findFirstOrThrow({
       where: {
         id: input,
-        owner: {
-        //@ts-ignore
-          project: {
-            members: {
-              some: {
-                userId: ctx.session.user.id,
-              },
+        project: {
+          members: {
+            some: {
+              userId: ctx.session.user.id,
             },
           },
         },
@@ -88,4 +87,29 @@ export const neuronsRouter = createTRPCRouter({
 
     return neuron;
   }),
+
+  create: protectedProjectProcedure
+    .input(NeuronInput)
+    .mutation(async ({ input, ctx }) => {
+      const neuron = (await ctx.prisma.neurons.create({
+        data: {
+          id: input.id ?? undefined,
+          project: { connect: { id: input.projectId ? input.projectId : "" } },
+          coldkey: input.coldkey ?? "", 
+          hotkey: input.hotkey ?? "",
+          uid: input.uid ?? 0,
+          rank: input.rank ?? 0,
+          stake: input.stake ?? 0,
+          emission: input.emission ?? 0,
+          incentive: input.incentive ?? 0,
+          consensus: input.consensus ?? 0,
+          trust: input.trust ?? 0,
+          netuid: input.netuid ?? 0,
+          registered: input.registered ?? false,
+        },
+      })) as Neuron;
+
+      return neuron;
+    }),
+
 });
