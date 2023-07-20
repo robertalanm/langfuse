@@ -67,6 +67,36 @@ export function ChartStakeOverTime(props: {
   );
 }
 
+export function ChartConsensusPerNetuid(props: {
+  agg: DateTimeAggregationOption;
+  projectId: string;
+  netuid: '1' | '11';
+}) {
+  const data = api.dashboard.consensusOverTimeBySubnet.useQuery({
+    agg: props.agg,
+    projectId: props.projectId,
+    netuid: props.netuid,
+  });
+
+  return (
+    <Card>
+      <CardHeader className="relative">
+        <CardTitle>Consensus Over Time (NetUID {props.netuid})</CardTitle>
+        {data.isLoading ? (
+          <div className="absolute right-5 top-5 ">
+            <Loader className="h-5 w-5 animate-spin" />
+          </div>
+        ) : null}
+      </CardHeader>
+      <CardContent>
+        <BaseTimeSeriesChart agg={props.agg} data={data.data ?? []} />
+      </CardContent>
+    </Card>
+  );
+}
+
+
+
 export function ChartCombinedEmission(props: {
   agg: DateTimeAggregationOption;
   projectId: string;

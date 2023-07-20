@@ -14,6 +14,7 @@ import {
   ChartStakeOverTime,
   ChartTrustOverTime,
   ChartIncentiveOverTime,
+  ChartConsensusPerNetuid
 } from "@/src/features/dashboard/components/charts";
 import { useRouter } from "next/router";
 
@@ -65,6 +66,7 @@ export default function Start() {
       <div className="col-span-1 md:col-span-2 xl:col-span-2">
         <ChartStakeOverTime agg={agg} projectId={projectId} />
       </div>
+
     </>
   )}
   {netuid !== "total" && (
@@ -72,11 +74,14 @@ export default function Start() {
       <div className="col-span-1 md:col-span-2 xl:col-span-6">
         <ChartCombinedEmissionPerNetuid agg={agg} projectId={projectId} netuid={netuid} />
       </div>
-      <div className="col-span-1 md:col-span-2 xl:col-span-3">
+      <div className="col-span-1 md:col-span-2 xl:col-span-2">
         <ChartTrustOverTime agg={agg} projectId={projectId} netuid={netuid} />
       </div>
-      <div className="col-span-1 md:col-span-2 xl:col-span-3">
+      <div className="col-span-1 md:col-span-2 xl:col-span-4">
         <ChartIncentiveOverTime agg={agg} projectId={projectId} netuid={netuid} />
+      </div>
+      <div className="col-span-1 md:col-span-2 xl:col-span-2">
+        <ChartConsensusPerNetuid agg={agg} projectId={projectId} netuid={netuid} />
       </div>
     </>
   )}
