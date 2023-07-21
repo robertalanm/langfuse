@@ -139,13 +139,13 @@ model Neurons {
     coldkey     String   @default("")
     hotkey      String   @default("")
     uid         Int      @default(0)
-    rank        Int
-    stake       Int
-    emission    Int
-    incentive   Int
-    consensus   Int
-    trust       Int
-    netuid      Int     @default(1)
+    rank        Float    @default(0.0)
+    stake       Float    @default(0.0)
+    emission    Float    @default(0.0)
+    incentive   Float    @default(0.0)
+    consensus   Float    @default(0.0)
+    trust       Float    @default(0.0)
+    netuid      Int      @default(1)
     registered  Boolean  @default(false)
 
     @@map("neurons")

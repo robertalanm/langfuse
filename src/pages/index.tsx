@@ -57,17 +57,7 @@ export default function GetStartedPage() {
             <p>If you prefer 1:1 support, we are happy to help.</p>
           </CardContent>
           <CardFooter className="flex flex-wrap gap-2">
-            <Button asChild variant="secondary">
-              <Link href="https://cal.com/marc-kl/langfuse-cloud">
-                Schedule call with founder
-              </Link>
-            </Button>
-            <Button asChild variant="secondary">
-              <Link href="https://discord.gg/7NXusRtqYU">Discord</Link>
-            </Button>
-            <Button asChild variant="secondary">
-              <Link href="mailto:onboarding@langfuse.com">Email</Link>
-            </Button>
+              <div className="txext-sm">remove this</div>
           </CardFooter>
         </Card>
       </div>

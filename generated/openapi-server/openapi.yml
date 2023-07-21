@@ -271,50 +271,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateNeuronsRequest'
-    patch:
-      description: Update a neuron in the database
-      operationId: neurons_updateNeurons
-      tags:
-        - Neurons
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Neurons'
-        '400':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-        '401':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-        '403':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-        '405':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      security: *ref_0
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateNeuronsRequest'
   /api/public/scores:
     post:
       description: Add a score to the database
@@ -924,22 +880,22 @@ components:
           type: integer
           nullable: true
         rank:
-          type: integer
+          type: string
           nullable: true
         stake:
-          type: integer
+          type: string
           nullable: true
         emission:
-          type: integer
+          type: string
           nullable: true
         incentive:
-          type: integer
+          type: string
           nullable: true
         consensus:
-          type: integer
+          type: string
           nullable: true
         trust:
-          type: integer
+          type: string
           nullable: true
         netuid:
           type: integer
@@ -947,50 +903,6 @@ components:
         registered:
           type: boolean
           nullable: true
-    UpdateNeuronsRequest:
-      title: UpdateNeuronsRequest
-      type: object
-      properties:
-        id:
-          type: string
-        projectId:
-          type: string
-          nullable: true
-        coldkey:
-          type: string
-          nullable: true
-        hotkey:
-          type: string
-          nullable: true
-        uid:
-          type: integer
-          nullable: true
-        rank:
-          type: integer
-          nullable: true
-        stake:
-          type: integer
-          nullable: true
-        emission:
-          type: integer
-          nullable: true
-        incentive:
-          type: integer
-          nullable: true
-        consensus:
-          type: integer
-          nullable: true
-        trust:
-          type: integer
-          nullable: true
-        netuid:
-          type: integer
-          nullable: true
-        registered:
-          type: boolean
-          nullable: true
-      required:
-        - id
     Neurons:
       title: Neurons
       type: object
@@ -1009,17 +921,17 @@ components:
         uid:
           type: integer
         rank:
-          type: integer
+          type: string
         stake:
-          type: integer
+          type: string
         emission:
-          type: integer
+          type: string
         incentive:
-          type: integer
+          type: string
         consensus:
-          type: integer
+          type: string
         trust:
-          type: integer
+          type: string
         netuid:
           type: integer
         registered:

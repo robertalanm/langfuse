@@ -12,12 +12,12 @@ const NeuronsCreateSchema = z.object({
   coldkey: z.string().nullish(),
   hotkey: z.string().nullish(),
   uid: z.number().nullish(),
-  rank: z.number().nullish(),
-  stake: z.number().nullish(),
-  emission: z.number().nullish(),
-  incentive: z.number().nullish(),
-  consensus: z.number().nullish(),
-  trust: z.number().nullish(),
+  rank: z.string().nullish(),
+  stake: z.string().nullish(),
+  emission: z.string().nullish(),
+  incentive: z.string().nullish(),
+  consensus: z.string().nullish(),
+  trust: z.string().nullish(),
   netuid: z.number().nullish(),
   registered: z.boolean().nullish()
 });
@@ -37,9 +37,7 @@ const NeuronPatchSchema = z.object({
   registered: z.boolean().nullish()
 });
 
-const NeuronDeleteSchema = z.object({
-  neuronId: z.string(),
-});
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -88,6 +86,14 @@ export default async function handler(
         });
       // END CHECK ACCESS SCOPE
 
+      const casted_rank = rank ? parseFloat(rank) : 0.0;
+      const casted_stake = stake ? parseFloat(stake) : 0.0;
+      const casted_emission = emission ? parseFloat(emission) : 0.0;
+        
+      const casted_incentive = incentive ? parseFloat(incentive) : 0.0;
+      const casted_consensus = consensus ? parseFloat(consensus) : 0.0;
+      const casted_trust = trust ? parseFloat(trust) : 0.0;
+
       const newNeuron = await prisma.neurons.create({
         data: {
           id: id ?? undefined,
@@ -95,12 +101,12 @@ export default async function handler(
           coldkey: coldkey ? coldkey : "",
           hotkey: hotkey ? hotkey : "",
           uid: uid ? uid : 0,
-          rank: rank ? rank : 0,
-          stake: stake ? stake : 0,
-          emission: emission ? emission : 0,
-          incentive: incentive ? incentive : 0,
-          consensus: consensus ? consensus : 0,
-          trust: trust ? trust : 0,
+          rank: casted_rank,
+          stake: casted_stake,
+          emission: casted_emission,
+          incentive: casted_incentive,
+          consensus: casted_consensus,
+          trust:  casted_trust,
           netuid: netuid ? netuid : 1,
           registered: registered ? registered : false,
         },

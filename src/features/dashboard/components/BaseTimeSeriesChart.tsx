@@ -49,10 +49,30 @@ export function BaseTimeSeriesChart(props: {
     });
   };
 
+  // Create a copy of the data
+  let dataCopy = [...props.data];
+
+  // Flatten all value numbers into a single array
+  const allValues = dataCopy.flatMap(d => d.values.map(v => v.value));
+
+  // Calculate the range of the values
+  const valueRange = Math.max(...allValues) - Math.min(...allValues);
+
+  // If the range is zero, add an offset to the values
+  if (valueRange === 0) {
+    const offset = 0.000000001;  // Define the offset
+
+    // Add the offset to each value in the copied data
+    dataCopy = dataCopy.map(d => ({
+      ...d,
+      values: d.values.map(v => ({ ...v, value: v.value + offset }))
+    }));
+  }
+
   return (
     <AreaChart
       className="mt-4 h-72"
-      data={transformArray(props.data)}
+      data={transformArray(dataCopy)}
       index="timestamp"
       categories={Array.from(labels)}
       colors={["green", "green"]}

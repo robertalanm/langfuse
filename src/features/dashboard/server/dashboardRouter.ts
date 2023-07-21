@@ -152,6 +152,8 @@ incentiveOverTimeSubnet: protectedProjectProcedure
     })
   )
   .query(async ({ input, ctx }) => {
+
+
     const output = await ctx.prisma.$queryRawUnsafe<
       {
         date_trunc: Date;

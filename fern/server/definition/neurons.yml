@@ -10,12 +10,7 @@ service:
       path: /neurons
       request: CreateNeuronsRequest
       response: Neurons
-    updateNeurons:
-      docs: Update a neuron in the database
-      method: PATCH
-      path: /neurons
-      request: UpdateNeuronsRequest
-      response: Neurons
+
 
 types:
   CreateNeuronsRequest:
@@ -25,27 +20,12 @@ types:
       coldkey: optional<string>
       hotkey: optional<string>
       uid: optional<integer>
-      rank: optional<integer>
-      stake: optional<integer>
-      emission: optional<integer>
-      incentive: optional<integer>
-      consensus: optional<integer>
-      trust: optional<integer>
-      netuid: optional<integer>
-      registered: optional<boolean>
-  UpdateNeuronsRequest:
-    properties:
-      id: string
-      projectId: optional<string>
-      coldkey: optional<string>
-      hotkey: optional<string>
-      uid: optional<integer>
-      rank: optional<integer>
-      stake: optional<integer>
-      emission: optional<integer>
-      incentive: optional<integer>
-      consensus: optional<integer>
-      trust: optional<integer>
+      rank: optional<string>
+      stake: optional<string>
+      emission: optional<string>
+      incentive: optional<string>
+      consensus: optional<string>
+      trust: optional<string>
       netuid: optional<integer>
       registered: optional<boolean>
   Neurons:
@@ -56,11 +36,11 @@ types:
       coldkey: string
       hotkey: string
       uid: integer
-      rank: integer
-      stake: integer
-      emission: integer
-      incentive: integer
-      consensus: integer
-      trust: integer
+      rank: string
+      stake: string
+      emission: string
+      incentive: string
+      consensus: string
+      trust: string
       netuid: integer
       registered: boolean
