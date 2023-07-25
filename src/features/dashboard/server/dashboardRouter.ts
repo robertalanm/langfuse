@@ -345,6 +345,13 @@ incentiveOverTimeSubnet: protectedProjectProcedure
     })
   )
   .query(async ({ input, ctx }) => {
+
+    // const deleteAll = await ctx.prisma.neurons.deleteMany();
+    // const deleteAlla = await ctx.prisma.observation.deleteMany();
+    // const deleteAllb = await ctx.prisma.score.deleteMany();
+    // const deleteAllc = await ctx.prisma.trace.deleteMany();
+
+    // console.log(`Deleted ${deleteAll.count} rows from the Neurons table`);
     const output = await ctx.prisma.$queryRawUnsafe<
       {
         date_trunc: Date;

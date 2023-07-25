@@ -21,7 +21,7 @@ export default function DescriptionList(props: {
           <h3 className="text-base font-semibold leading-7 text-gray-50">
             {props.header.title}
           </h3>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-50">
             {props.header.description}
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function DescriptionList(props: {
                 {item.label}
               </dt>
               <dd
-                className={`mt-1 text-sm leading-6 text-gray-700 sm:col-span-${valueColumns} sm:mt-0`}
+                className={`mt-1 text-sm leading-6 text-white sm:col-span-${valueColumns} sm:mt-0`}
               >
                 {item.value}
               </dd>

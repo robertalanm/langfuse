@@ -54,12 +54,12 @@ export default function TracePage() {
                     label: metric.name,
                     value: (
                       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
-                        <div className="text-sm font-bold">
+                        <div className="text-sm font-bold text-white">
                           {metric.value.toString()}
                         </div>
                         {metric.comment !== null ? (
                           <div>
-                            <div className="text-xs font-semibold text-gray-500">
+                            <div className="text-xs font-semibold text-gray-50">
                               Comment
                             </div>
                             <div className="text-sm">{metric.comment}</div>

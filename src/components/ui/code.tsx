@@ -49,11 +49,11 @@ export function CodeView(props: {
       )}
     >
       {props.label ? (
-        <div className="text-xs font-medium">{props.label}</div>
+        <div className="text-xs text-white font-medium">{props.label}</div>
       ) : undefined}
       <code
         className={cn(
-          "whitespace-pre-wrap break-words font-mono text-xs",
+          "whitespace-pre-wrap break-words font-mono text-xs text-white",
           isCollapsed ? `line-clamp-4` : "block"
         )}
       >
